@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title> 달력 </title>
+  </head>
+  <body>
+    <script type="text/javascript">
+    while(1){
+      var year = prompt("확인하고자 하는 년도? ");
+        if(year >= 2100 || year < 0){
+          alert("년도는 0 ~ 2099년 내에서 지정해 주세요!");
+          continue;
+        }
+      break;
+    }
+
+    while(1){
+      var month = prompt("월? ");
+        if(month < 0 || month > 12 ){
+          alert("월은 1 ~ 12월 내에서 지정해 주세요!");
+          continue;
+        }
+      break;
+    }
+    var monthDay = new Array (0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+    var allDay = 1;
+    var startDay = 1;
+    monthDay[2] = 28;
+
+    allDay += (((year - 1) * 365) + ((year-1)/4) - ((year-1)/100) + ((year-1)/400));
+
+    if(year%4===0 && year%100!==0 || year%400===0)
+      monthDay[2] = 29;
+
+    for(var i=1; i<month; i++)
+      allDay+= monthDay[i];
+
+    allDay = Math.floor(allDay);
+    startDay = allDay%7;
+    var day = 1;
+
+    document.writeln(year + " 년  " + month + " 월  ");
+    document.write("<table>");
+    document.write("<tr>");
+    document.write("<td>" + "일" +"</td>");
+    document.write("<td>" + "월" +"</td>");
+    document.write("<td>" + "화" +"</td>");
+    document.write("<td>" + "수" +"</td>");
+    document.write("<td>" + "목" +"</td>");
+    document.write("<td>" + "금" +"</td>");
+    document.write("<td>" + "토" +"</td>");
+    document.write("</tr>");
+
+      for(i=0; i<5; i++){
+        document.write("<tr align=center>");
+        if(i===0){    //startDay 값이 1~6 일때
+          switch (startDay) {
+            case 1:
+            {
+                document.write("<td colspan = 1>" + "</td>");
+                break;
+            }
+            case 2:
+            {
+              document.write("<td colspan = 2>" + "</td>");
+              break;
+            }
+            case 3:
+            {
+              document.write("<td colspan = 3>" + "</td>");
+              break;
+            }
+            case 4:
+            {
+              document.write("<td colspan = 4>" + "</td>");
+              break;
+            }
+            case 5:
+            {
+              document.write("<td colspan = 5>" + "</td>");
+              break;
+            }
+             case 6:
+             {
+              document.write("<td colspan = 6>" + "</td>");
+              break;
+              }
+          }
+
+            for(var j=startDay; j<7; j++){
+            document.write("<td align = center>" + day + "</td>")
+            day++;
+          }
+        }
+      else{
+        for(var j=0; j<7; j++){
+          if(day > monthDay[month])
+          break;
+          document.write("<td align = center>" + day + "</td>");
+          day++;
+        }
+      }
+        document.write("</tr>");
+      }
+    document.write("</table>");
+
+</script>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>숙제</title>
+    <style media="screen">
+      td{
+        border: 1px solid gray;
+      }
+    </style>
+  </head>
+  <body>
+
+    <form id="f1" action="b.js" method="get">
+      <p>box1 :
+      <input type="text" id="make1" name="textarea"  placeholder="줄/칸 입력">
+      </p>
+      <p>box2 :
+      <input type="text" id="make2" name="textarea2"  placeholder="줄/칸 입력">
+      </p>
+      <input type="button" value="생성" id="makeButton"></input>
+      <input type="button" value="테이블 지우기" id="delButton" >
+      <hr>
+      <div id="box1"></div>
+      <div id="box2"></div>
+    </form>
+  </body>
+
+  <script type="text/javascript">
+      window.onload = function(){
+        makeButton.onclick = makeTable;
+        delButton.onclick = remove;
+      }
+
+      function createGrid(box, tr, td){
+        var num = 1;
+
+        var tableTag = document.createElement("table");
+
+
+        for(var a=0; a < tr; a++) {
+          var trTag = document.createElement("tr");
+          tableTag.appendChild(trTag);
+          for(var b=0; b<td; b++){
+            var tdTag = document.createElement("td");
+            tdTag.innerHTML = num++;
+            trTag.appendChild(tdTag);
+          }
+          box.appendChild(tableTag);
+        }
+
+      }
+
+      function makeTable(){
+        var length = box1.childNodes.length;
+
+        if(length == 0){
+          var split1 = make1.value.split("/");
+          var split2 = make2.value.split("/");
+
+
+          createGrid(box1, split1[0], split1[1]);
+          createGrid(box2, split2[0], split2[1]);
+        }
+      }
+
+      function remove(){
+        var str1 = document.getElementById("box1");
+        var str2 = document.getElementById("box2");
+        str1.removeChild(str1.childNodes[0]);
+        str2.removeChild(str2.childNodes[0]);
+
+      }
+  </script>
+</html>
